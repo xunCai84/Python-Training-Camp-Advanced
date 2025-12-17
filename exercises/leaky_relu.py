@@ -25,6 +25,7 @@ def leaky_relu(x, alpha=0.01):
     # 请在此处编写代码
     # 提示：
     # 1. 可以使用 np.maximum() 函数。
+    return np.maximum(alpha * x, x)
     # 2. 计算 alpha * x。
     # 3. 计算 max(alpha * x, x)。
-    pass 
+    
