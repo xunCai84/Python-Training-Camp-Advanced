@@ -21,6 +21,19 @@ def contour_detection(image_path):
     # 请在此处编写代码
     # 提示：
     # 1. 使用 cv2.imread() 读取图像。
+    try:
+        img = cv2.imread(image_path)
+        if img is None:
+            return None, None
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        _, thresh = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY)
+        contours, _ = cv2.findContours(thresh, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        contours = list(contours)
+        img_contours = img.copy()
+        cv2.drawContours(img_contours, contours, -1, (0, 255, 0), 2)
+        return img_contours, contours
+    except Exception as e:
+        return None, None
     # 2. 检查图像是否成功读取。
     # 3. 使用 cv2.cvtColor() 转为灰度图。
     # 4. 使用 cv2.threshold() 进行二值化处理。
